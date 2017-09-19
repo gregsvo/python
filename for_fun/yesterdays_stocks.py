@@ -21,15 +21,20 @@ from datetime import datetime, timedelta
 # stock_prices_yesterday = [6, 7, 12, 2, 11, 9]
 # stock_prices_yesterday = [9, 8, 7, 6, 5, 4]
 # stock_prices_yesterday = [1, 2, 3, 4, 5, 6]
-stock_prices_yesterday = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, \
-6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6, 5, 4, 3,\
- 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3,\
-  4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 4, 5, 6, 3, 2, 44, 2, 1]
+#stock_prices_yesterday = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, \
+#6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6, 5, 4, 3,\
+# 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3,\
+#  4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 4, 5, 6, 3, 2, 44, 2, 1]
+stock_prices_yesterday = [2, 2, 2, 2, 2]
 stock_market_open_hour = 9
 stock_market_open_minute = 30
 
 
 def get_max_profit(stock_prices_yesterday=stock_prices_yesterday, stock_market_open_hour=stock_market_open_hour, stock_market_open_minute=stock_market_open_minute):
+
+    if len(stock_prices_yesterday) < 2:
+        raise IndexError('There must be at least two prices listed in stock_prices_yesterday')
+
     yesterday_date = get_yesterday_market_open_datetime(stock_market_open_hour, stock_market_open_minute)
     buy_stock_price, buy_stock_time = get_buy_price_and_time(stock_prices_yesterday)
     sell_stock_price, sell_stock_time = get_sell_price_and_time(stock_prices_yesterday=stock_prices_yesterday, buy_stock_price=buy_stock_price, buy_stock_time=buy_stock_time)
@@ -67,7 +72,7 @@ def get_buy_price_and_time(stock_prices_yesterday):
     for price in stock_prices_yesterday:
         if buy_stock_price > price:
             buy_stock_price = price
-            buy_stock_time = stock_prices_yesterday.index(price)
+    buy_stock_time = stock_prices_yesterday.index(buy_stock_price)
     return buy_stock_price, buy_stock_time
 
 
@@ -77,13 +82,14 @@ def get_sell_price_and_time(stock_prices_yesterday, buy_stock_price, buy_stock_t
     for price in stock_prices_yesterday[buy_stock_time:]:
         if sell_stock_price < price:
             sell_stock_price = price
-            sell_stock_time = stock_prices_yesterday.index(price)
+
+    sell_stock_time = stock_prices_yesterday.index(price)
     return sell_stock_price, sell_stock_time
 
 
 def print_results(buy_stock_price, buy_stock_time, sell_stock_price, sell_stock_time):
     if buy_stock_time == sell_stock_time:
-        print("Stocks fell all day, and no profit was to be made.")
+        print("No profit was to be made in stocks.")
     else:
         print('You should have bought stock at: {}'.format(format_best_transaction_time_for_print(buy_stock_time)))
         print('When it was selling for only: ${}'.format(buy_stock_price))
