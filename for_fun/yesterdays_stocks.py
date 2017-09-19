@@ -20,8 +20,11 @@ No "shorting"—you must buy before you sell. You may not buy and sell in the sa
 from datetime import datetime, timedelta
 # stock_prices_yesterday = [6, 7, 12, 2, 11, 9]
 # stock_prices_yesterday = [9, 8, 7, 6, 5, 4]
-stock_prices_yesterday = [1, 2, 3, 4, 5, 6]
-stock_prices_yesterday = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
+# stock_prices_yesterday = [1, 2, 3, 4, 5, 6]
+stock_prices_yesterday = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, \
+6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 1, 2, 3, 4, 5, 6, 5, 4, 3,\
+ 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3,\
+  4, 5, 6, 5, 4, 3, 2, 1,1, 2, 3, 4, 5, 6, 5, 4, 3, 4, 5, 6, 3, 2, 44, 2, 1]
 stock_market_open_hour = 9
 stock_market_open_minute = 30
 
@@ -54,7 +57,7 @@ def get_yesterday_market_open_datetime(stock_market_open_hour, stock_market_open
 def format_best_transaction_time_for_print(transaction_time):
     hour = transaction_time.hour
     minute = transaction_time.minute
-    formatted_transaction_time = '{}:{}'.format(hour, minute)
+    formatted_transaction_time = '{}:{:02}'.format(hour, minute)
     return formatted_transaction_time
 
 
