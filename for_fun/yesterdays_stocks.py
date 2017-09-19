@@ -18,7 +18,10 @@ No "shorting"—you must buy before you sell. You may not buy and sell in the sa
 
 """
 from datetime import datetime, timedelta
-stock_prices_yesterday = [10, 7, 5, 8, 11, 9]
+# stock_prices_yesterday = [6, 7, 12, 2, 11, 9]
+# stock_prices_yesterday = [9, 8, 7, 6, 5, 4]
+stock_prices_yesterday = [1, 2, 3, 4, 5, 6]
+stock_prices_yesterday = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
 stock_market_open_hour = 9
 stock_market_open_minute = 30
 
@@ -62,7 +65,6 @@ def get_buy_price_and_time(stock_prices_yesterday):
         if buy_stock_price > price:
             buy_stock_price = price
             buy_stock_time = stock_prices_yesterday.index(price)
-
     return buy_stock_price, buy_stock_time
 
 
@@ -73,18 +75,19 @@ def get_sell_price_and_time(stock_prices_yesterday, buy_stock_price, buy_stock_t
         if sell_stock_price < price:
             sell_stock_price = price
             sell_stock_time = stock_prices_yesterday.index(price)
-
     return sell_stock_price, sell_stock_time
 
 
 def print_results(buy_stock_price, buy_stock_time, sell_stock_price, sell_stock_time):
-    print('You should have bought stock at: {}'.format(
-        format_best_transaction_time_for_print(buy_stock_time)))
-    print('When it was selling for only: ${}'.format(buy_stock_price))
-    print('**' * 25)
-    print('Then sold it at: {}'.format(
-        format_best_transaction_time_for_print(sell_stock_time)))
-    print('When it was selling for: ${}'.format(sell_stock_price))
+    if buy_stock_time == sell_stock_time:
+        print("Stocks fell all day, and no profit was to be made.")
+    else:
+        print('You should have bought stock at: {}'.format(format_best_transaction_time_for_print(buy_stock_time)))
+        print('When it was selling for only: ${}'.format(buy_stock_price))
+        print('**' * 25)
+        print('Then sold it at: {}'.format(
+            format_best_transaction_time_for_print(sell_stock_time)))
+        print('When it was selling for: ${}'.format(sell_stock_price))
 
 
 if __name__ == '__main__':
