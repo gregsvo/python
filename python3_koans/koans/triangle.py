@@ -16,9 +16,16 @@
 # and
 #   about_triangle_project_2.py
 #
+
+
 def triangle(a, b, c):
-    # DELETE 'PASS' AND WRITE THIS CODE
-    pass
+    if a <= 0 or b <= 0 or c <= 0:
+        raise TriangleError("Sides can not be less than 0")
+    if a + b + c <= 2 * max([a, b, c]):
+        raise TriangleError('Two sides must sum greater than third side')
+    type_dict = {1: 'equilateral', 2: 'isosceles', 3: 'scalene'}
+    return type_dict.get(len(set([a, b, c])))
+
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError(Exception):

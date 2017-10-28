@@ -13,6 +13,7 @@ class AboutTriangleProject2(Koan):
         # All sides should be greater than 0
         with self.assertRaises(TriangleError):
             triangle(0, 0, 0)
+            
         with self.assertRaises(TriangleError):
             triangle(3, 4, -5)
 
