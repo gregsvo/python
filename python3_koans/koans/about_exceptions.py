@@ -29,8 +29,7 @@ class AboutExceptions(Koan):
         self.assertEqual(True, isinstance(ex2, Exception))
         self.assertEqual(False, isinstance(ex2, RuntimeError))
 
-        self.assertTrue(issubclass(RuntimeError, Exception), \
-            "RuntimeError is a subclass of Exception")
+        self.assertTrue(issubclass(RuntimeError, Exception), "RuntimeError is a subclass of Exception")
 
         self.assertEqual('Oops', ex2.args[0])
 
